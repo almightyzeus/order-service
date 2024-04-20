@@ -2,8 +2,8 @@
 const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
-  product: {
-    type: Object,
+  productId: {
+    type: mongoose.Schema.Types.ObjectId,
     required: true
   },
   quantity: {
@@ -21,7 +21,7 @@ const orderSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: true
   },
-  productList: [productSchema], // Array of product items
+  products: [productSchema], // Array of product items
   totalPrice: {
     type: Number,
     required: true
