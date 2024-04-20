@@ -23,7 +23,7 @@ productSchema.set('toJSON', { virtuals: true });
 
 const orderSchema = new mongoose.Schema({
   userId: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Number,
     required: true
   },
   productList: [productSchema], // Array of product items
