@@ -9,12 +9,17 @@ const productSchema = new mongoose.Schema({
   quantity: {
     type: Number,
     required: true
-  },
-  price: {
-    type: Number,
-    required: true
   }
 });
+
+// Define virtual property for price
+productSchema.virtual('price').get(function() {
+  // Compute price by multiplying productPrice and quantity
+  return this.product.productPrice * this.quantity;
+});
+
+// Enable virtuals to be included in JSON.stringify()
+productSchema.set('toJSON', { virtuals: true });
 
 const orderSchema = new mongoose.Schema({
   userId: {
@@ -35,6 +40,14 @@ const orderSchema = new mongoose.Schema({
     enum: ['pending', 'processing', 'shipped', 'delivered', 'cancelled', 'refunded'],
     default: 'pending'
   }
+});
+
+// Calculate total price before saving the order document
+orderSchema.pre('save', function(next) {
+  // Sum up the prices of all products in the productList
+  const totalPrice = this.productList.reduce((acc, product) => acc + product.price, 0);
+  this.totalPrice = totalPrice; // Update the totalPrice field
+  next();
 });
 
 module.exports = mongoose.model('Order', orderSchema);
