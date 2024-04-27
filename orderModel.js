@@ -29,7 +29,7 @@ const orderSchema = new mongoose.Schema({
   productList: [productSchema], // Array of product items
   totalPrice: {
     type: Number,
-    required: true
+    required: false
   },
   createdAt: {
     type: Date,

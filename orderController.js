@@ -1,11 +1,26 @@
 // orderController.js
 const Order = require('./orderModel');
+const axios = require('axios');
 
 exports.createOrder = async (req, res) => {
   try {
-    const { userId, productList, totalPrice } = req.body;
-    const order = new Order({ userId, productList, totalPrice });
+    const { userId, productList} = req.body;
+    const order = new Order({ userId, productList });
     await order.save();
+    const emailUrl = 'https://localhost:7148/api/SendEmailFunction'; // Replace this with your actual URL
+
+    // Dummy data to be sent in the HTTP POST request
+    const orderData = {order};
+
+    // Send HTTP POST request to the dummy URL with the order object
+    axios.post(emailUrl, orderData)
+  .then(response => {
+    console.log('Email sent successfully:', response.data);
+  })
+  .catch(error => {
+    console.error('Error sending email:', error);
+  });
+
     res.status(201).json(order);
   } catch (error) {
     console.log(error);
