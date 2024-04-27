@@ -8,7 +8,18 @@ const app = express();
 app.use(bodyParser.json());
 
 // Connect to MongoDB database
-mongoose.connect('mongodb://localhost:27017/order_service', { useNewUrlParser: true, useUnifiedTopology: true })
+const argv = require('minimist')(process.argv.slice(2));
+
+// Read MongoDB connection options from command line arguments
+const mongodbHost = argv.host || 'localhost';
+const mongodbPort = argv.port || '27017';
+const mongodbDatabase = argv.database || 'order_service';
+
+// Construct MongoDB connection string
+const connectionString = `mongodb://${mongodbHost}:${mongodbPort}/${mongodbDatabase}`;
+
+// Connect to MongoDB
+mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('Connected to MongoDB');
   })
