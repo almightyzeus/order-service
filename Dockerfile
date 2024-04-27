@@ -13,8 +13,5 @@ RUN npm install
 # Expose the port your app runs on
 EXPOSE 3000
 
-# Expose the MongoDB port
-EXPOSE 27017
-
 # Command to run your application
-CMD ["node", "app.js", "--host", "mongodb-container", "--port", "27017", "--database", "order-service"]
+CMD ["node", "app.js", "--host", "mongodb.default.svc.cluster.local", "--port", "27017", "--database", "order-service"]
