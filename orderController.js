@@ -7,7 +7,7 @@ exports.createOrder = async (req, res) => {
     const { userId, productList} = req.body;
     const order = new Order({ userId, productList });
     await order.save();
-    const emailUrl = 'https://localhost:7148/api/SendEmailFunction'; // Replace this with your actual URL
+    const emailUrl = 'http://localhost:7148/api/SendEmailFunction'; // Replace this with your actual URL
 
     // Dummy data to be sent in the HTTP POST request
     const orderData = {order};
