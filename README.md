@@ -4,12 +4,14 @@ Microservice for order management built using NodeJS,ExpressJS, MongoDB , provid
 ## Installation
 
 To install the necessary dependencies, run:
-npm install
+**npm install**
 
 ## Start the server
 
 To start running the app:
-node app
+
+**node app**
+
 The server will start running on port 3000 by default.
 
 ## Application Structure
@@ -35,6 +37,7 @@ The following API endpoints are available:
 - **Express**: Fast, unopinionated, minimalist web framework for Node.js.
 - **Body-parser**: Node.js body parsing middleware to parse incoming request bodies.
 - **Mongoose**: MongoDB object modeling tool designed to work in an asynchronous environment.
+- **MongoDB**: MongoDB needs to be running on port 27017 by default but could be changed if needed.
 - **Axios**: Promise-based HTTP client for the browser and Node.js, used for making HTTP requests to external APIs.
 
 ## Contributing
