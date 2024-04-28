@@ -6,7 +6,10 @@ Microservice for order management built using NodeJS,ExpressJS, MongoDB , provid
 To install the necessary dependencies, run:
 npm install
 
+## Start the server
 
+To start running the app:
+node app
 The server will start running on port 3000 by default.
 
 ## Application Structure
