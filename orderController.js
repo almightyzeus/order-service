@@ -4,10 +4,34 @@ const axios = require('axios');
 
 exports.createOrder = async (req, res) => {
   try {
+    // const userApiUrl = 'https://dummyuserapi.com/api/users/';
+
     const { userId, productList} = req.body;
-    const order = new Order({ userId, productList });
+
+    // // Check if the user exists
+    // const userResponse = await axios.get(`${userApiUrl}${userId}`);
+
+    // if (!userResponse.data) {
+    //   return res.status(404).json({ error: 'User not found' });
+    // }
+
+    // Fetch product details for each product in the productList
+    const productDetailsPromises = productList.map(async (product) => {
+      const productResponse = await axios.get(`https://localhost:5000/api/product/list/${product.productId}`);
+      return {
+        product: productResponse.data,
+        quantity: product.quantity
+      };
+    });
+
+    // Wait for all product detail requests to finish
+    const productDetails = await Promise.all(productDetailsPromises);
+
+    // Create order with product details
+    const order = new Order({ userId, productList: productDetails});
+    // const order = new Order({ userId, productList });
     await order.save();
-    const emailUrl = 'http://localhost:7148/api/SendEmailFunction'; // Replace this with your actual URL
+    const emailUrl = 'http://localhost:7148/api/SendEmailFunction';
 
     // Dummy data to be sent in the HTTP POST request
     const orderData = {order};
