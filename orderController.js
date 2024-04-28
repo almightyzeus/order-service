@@ -98,6 +98,3 @@ exports.deleteOrder = async (req, res) => {
     }
   };
   
-  
-
-// Implement other CRUD operations (getOrder, updateOrder, deleteOrder) as needed
