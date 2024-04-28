@@ -17,7 +17,7 @@ exports.createOrder = async (req, res) => {
 
     // Fetch product details for each product in the productList
     const productDetailsPromises = productList.map(async (product) => {
-      const productResponse = await axios.get(`https://localhost:5000/api/product/list/${product.productId}`);
+      const productResponse = await axios.get(`http://localhost:5000/product/list/${product.productId}`);
       return {
         product: productResponse.data,
         quantity: product.quantity
